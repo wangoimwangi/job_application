@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Staff Page{% endblock %}
+{% load static %}
+{% block body %}
+{% include 'staff/side_bar_staff.html' %}
+<section class="section-start p-5">
+    <div class="container text-center">
+        <h2 class="mb-5"> <span class="text-info"> Hire Here For Free!</h2>
+        <p class="mb-3">
+        <h4>Hiring can be a tedious task,let us help you find the best candidate.</h4>
+        <h4>Join us and Get started today!</h4>
+        </p>
+        <a role="button" class="btn btn-primary" href="{% url 'add-job' %}">Post Jobs</a>
+    </div> 
+</section>
+{% endblock %}

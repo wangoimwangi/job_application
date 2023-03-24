@@ -1,0 +1,89 @@
+<!--Display posted jobs and has a button to apply and save jobs-->
+<!--Has a save button which turns into remove button once we save the job and vice versa-->
+<!---Dispaly jobs related to the one posted-->
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Job details{% endblock %}
+{% block body %}
+
+<br /><br />
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-signin my-5">
+                <div class="card-body">
+                    <h3>{{ job.title }} ({{ job.job_type }})</h3>
+                    <p style="font-size: 18px">{{ job.company }}, {{ job.location }}</p>
+
+                    <span style="font-size: 18px"><b>Job Description</b></span>
+                    <p style="font-size: 17px">
+                        {{ job.description }}
+                    </p>
+                    <hr my-2 />
+                    <p><b class="mr-2">Skills Required:</b>{{job.skills_req}}</p>
+
+                    {% if user.user_type == 'applicant' %}
+                    {% if already_applied == True %}
+                    <a role="button" class="btn btn-success">Application submitted!</a>
+                    {% else %}
+                    <a role="button" class="btn btn-success" href="{% url 'apply-job' job.id %}"><b>Apply</b></a>
+                    {% endif %}
+                    <a role="button" class="btn btn-primary ms-2" href="#"><b>Bookmark</b></a>
+                    {% else %}
+                    <a role="button" class="btn btn-primary" href="{% url 'edit-job-post' job.slug %}"><b>Edit</b></a>
+                    <br>
+                    <br>
+                    <a role="button" class="btn btn-success" href="{% url 'job-candidate-search' job.slug %}"><b>Relevant Applicants</b></a>
+
+                    {% endif %}
+                </div>
+            </div>
+
+            {% if user.user_type == 'staff' %}
+            <h2>Applicants</h2>
+            <div class="list-group">
+                {% for x in applications %}
+                <a href="{% url 'applicant-details' x.id %}" class="list-group-item">
+                    {{ x.applicant }}
+                </a>
+                {% empty %}
+                <li class="list-group-item text-danger">No applicants yet!</li>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    {% if user.user_type == 'applicant' %}
+    <hr my-1 />
+    <h3 class="text-center">Similar Jobs</h3>
+    <div class="row">
+        {% for rel_job in relevant_jobs %}
+        <div class="col-md-6">
+            <div class="card card-signin my-2">
+                <span class="ml-3 mt-3">
+                    <a href="{% url 'job-details' rel_job.slug %}">
+                        <h4 class="text-dark">
+                            <b>{{rel_job.title}} ({{rel_job.job_type}})</b>
+                        </h4>
+                    </a>
+                    <p style="font-size: 17px">
+                        {{rel_job.company}}<br />{{rel_job.location}}
+                    </p>
+                    <p style="font-size: 15px">
+                        {{rel_job.description|truncatewords:30}} -
+                        <a href="{% url 'job-details' rel_job.slug %}">Read More</a>
+                    </p>
+                </span>
+                <div class="card-footer">
+                    <span style="font-size: 14px">Posted on {{rel_job.date_posted|date:"F d, Y"}}</span>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="text-danger text-center p-5">No Relevant Jobs Available!</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+{% endblock body %}

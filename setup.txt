@@ -1,0 +1,59 @@
+superuser
+admin
+Mariakoi9august
+--------------------------------------------------------
+staff
+maria_koi, faith_nzilani, maria
+Password: Mariakoi9august
+-------------------------------------------------------------
+start server= 
+stop server= ctrl+c python manage.py runserver
+---------------------------------------------------------------
+Set up a virtual environment;python -m venv env
+Activate the virtual environment;
+    If error; Set-ExecutionPolicy Unrestricted -Scope P.\\env\Scripts\activateprocess
+              .\\env\Scripts\activate
+-----------------------------------------------------------------
+install django= pip install django
+to create the project folder= mkdir projects(where projects is the name of your folder)
+to move to the project folder = cd project
+
+create your project inside the empty folder created= django-admin startproject jobs(where jobs repr the name of your project)
+
+
+----------------------------------------------------------------------------
+pip install -r requirements.txt  
+Pin your dependencies;python -m pip freeze > requirements.txt
+----------------------------------------------------------------------
+Set up a Django project; django-admin startproject <projectname>
+-----------------------------------------------------------------------
+Start a Django app;python manage.py startapp <appname>
+------------------------------------------------------------------------
+To build tables = python manage.py migrate
+python manage.py makemigrations(Turn off the server first then run this migration)
+Run this command again to create the table in your database; python manage.py migrate
+Register the created tables with the admin panel
+--------------------------------------------------------------------------
+Creating a Super User;python manage.py createsuperuser
+---------------------------------------------------------------
+Query database =python manage .py shell
+from jobseeker.models import *
+------------------------------------------------------
+pip install django-widget-tweaks
+pip install phonenumbers
+pip install django-phonenumber-field
+ -------------------------------------------------------
+ctrl k+u comment all
+----------------------------------------------------------
+
+#System users
+----------------------------
+STAFF!!
+kimanthi           mike
+maria9august       9AUGUSTmaria
+......................................
+APPLICANT!!
+jane               peter
+MARIA9august       mariakoi9august
+--------------------------------------------
+ctrl+/ =To delete all
